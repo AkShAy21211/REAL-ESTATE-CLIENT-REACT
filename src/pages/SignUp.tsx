@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 import toast, { toastConfig } from "react-simple-toasts";
 import "react-simple-toasts/dist/theme/dark.css"; // import the desired theme
-import { signUp } from "../api";
+import { signUp } from "../api/common";
 
 type Inputs = {
   username: string;
@@ -14,7 +14,7 @@ type Inputs = {
 };
 
 const SignUp = () => {
-  const [tab, setTab] = useState<'buyer' | 'realtor'>('buyer');
+  const [tab, setTab] = useState<"buyer" | "realtor">("buyer");
 
   const {
     register,
@@ -32,14 +32,8 @@ const SignUp = () => {
         data.password
       );
 
-      if (response) {
-        localStorage.setItem("token", response.token);
-      }
-      toast("User signed up successfully!", {
-        theme: "dark",
-        position: "top-center",
-        className: "bg-green-500",
-      });
+ 
+
     } catch (error) {
       console.log(error);
     }
@@ -50,14 +44,18 @@ const SignUp = () => {
       <div className="m-5 w-full sm:w-52 md:w-80 h-auto bg-cream rounded-md backdrop-sepia-0 bg-cream/50">
         <div className="flex justify-center mb-4 mt-5 w-auto ">
           <button
-            className={`px-4 mx-2 shadow-sm shadow-gray-600 py-2 w-full rounded-t-lg ${tab === 'buyer' ? 'bg-forestGreen text-white' : 'bg-gray-200'}`}
-            onClick={() => setTab('buyer')}
+            className={`px-4 mx-2 shadow-sm shadow-gray-600 py-2 w-full rounded-t-lg ${
+              tab === "buyer" ? "bg-forestGreen text-white" : "bg-gray-200"
+            }`}
+            onClick={() => setTab("buyer")}
           >
             Buyer
           </button>
           <button
-            className={`px-4 mx-2 shadow-sm shadow-gray-600  py-2 w-full rounded-t-lg ${tab === 'realtor' ? 'bg-forestGreen text-white' : 'bg-gray-200'}`}
-            onClick={() => setTab('realtor')}
+            className={`px-4 mx-2 shadow-sm shadow-gray-600  py-2 w-full rounded-t-lg ${
+              tab === "realtor" ? "bg-forestGreen text-white" : "bg-gray-200"
+            }`}
+            onClick={() => setTab("realtor")}
           >
             Realtor
           </button>
@@ -67,7 +65,7 @@ const SignUp = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col p-3 gap-3 justify-center items-center mt-10"
         >
-          {tab === 'buyer' && (
+          {tab === "buyer" && (
             <>
               <input
                 {...register("username", {
@@ -87,7 +85,9 @@ const SignUp = () => {
                 className="w-full p-3 placeholder:text-gray-700 rounded-lg bg-transparent border border-black"
               />
               {errors.name && (
-                <p className="text-xs w-full text-red-500">{errors.name.message}</p>
+                <p className="text-xs w-full text-red-500">
+                  {errors.name.message}
+                </p>
               )}
 
               <input
@@ -142,8 +142,8 @@ const SignUp = () => {
               )}
             </>
           )}
-          
-          {tab === 'realtor' && (
+
+          {tab === "realtor" && (
             <>
               <input
                 {...register("username", {
@@ -163,7 +163,9 @@ const SignUp = () => {
                 className="w-full p-3 placeholder:text-gray-700 rounded-lg bg-transparent border border-black"
               />
               {errors.name && (
-                <p className="text-xs w-full text-red-500">{errors.name.message}</p>
+                <p className="text-xs w-full text-red-500">
+                  {errors.name.message}
+                </p>
               )}
 
               <input

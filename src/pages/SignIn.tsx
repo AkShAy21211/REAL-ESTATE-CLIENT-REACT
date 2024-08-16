@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { signIn } from "../api/common";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 type Inputs = {
   usernameoremail: string;
@@ -8,7 +10,9 @@ type Inputs = {
 };
 
 const SignIn = () => {
-  const [tab, setTab] = useState<'buyer' | 'realtor'>('buyer');
+  const [tab, setTab] = useState<"buyer" | "realtor">("buyer");
+  const {setData}= useLocalStorage();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -16,21 +20,39 @@ const SignIn = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const response = await signIn(data.usernameoremail, data.password, tab);
+
+      if (response) {
+        setData("token", response.token);
+        setData("role", response.role);
+        navigate("/");
+      }
+
+      return;
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
 
   return (
-    <div className="flex h-screen justify-center items-center bg-login-bg bg-cover bg-center bg-no-repeat">
+    <div className="flex h-screen justify-center items-center bg-login-bg  bg-cover bg-center bg-no-repeat">
       <div className="m-5 w-full sm:w-52 md:w-80 h-auto bg-cream rounded-md backdrop-sepia-0 bg-cream/50">
-       <div className="flex justify-center mb-4 mt-5 w-auto ">
+        <div className="flex justify-center mb-4 mt-5 w-auto ">
           <button
-            className={`px-4 mx-2 shadow-sm shadow-gray-600 py-2 w-full rounded-t-lg ${tab === 'buyer' ? 'bg-forestGreen text-white' : 'bg-gray-200'}`}
-            onClick={() => setTab('buyer')}
+            className={`px-4 mx-2 shadow-sm shadow-gray-600 py-2 w-full rounded-t-lg ${
+              tab === "buyer" ? "bg-forestGreen text-white" : "bg-gray-200"
+            }`}
+            onClick={() => setTab("buyer")}
           >
             Buyer
           </button>
           <button
-            className={`px-4 mx-2 shadow-sm shadow-gray-600  py-2 w-full rounded-t-lg ${tab === 'realtor' ? 'bg-forestGreen text-white' : 'bg-gray-200'}`}
-            onClick={() => setTab('realtor')}
+            className={`px-4 mx-2 shadow-sm shadow-gray-600  py-2 w-full rounded-t-lg ${
+              tab === "realtor" ? "bg-forestGreen text-white" : "bg-gray-200"
+            }`}
+            onClick={() => setTab("realtor")}
           >
             Realtor
           </button>
@@ -39,7 +61,7 @@ const SignIn = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col p-3 gap-5 justify-center items-center mt-10"
         >
-          {tab === 'buyer' && (
+          {tab === "buyer" && (
             <>
               <input
                 {...register("usernameoremail")}
@@ -53,7 +75,7 @@ const SignIn = () => {
               />
             </>
           )}
-          {tab === 'realtor' && (
+          {tab === "realtor" && (
             <>
               <input
                 {...register("usernameoremail")}
@@ -67,7 +89,7 @@ const SignIn = () => {
               />
             </>
           )}
-          
+
           {(errors.password || errors.usernameoremail) && (
             <span className="float-start text-xs w-full text-red-500">
               Please fill all the fields

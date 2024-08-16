@@ -14,6 +14,7 @@ module.exports = {
       },
        backgroundImage: {
         'login-bg': "url('./src/assets/login.jpg')",
+        'banner': "url('./src/assets/banner.jpg')",
       },
     },
   },
