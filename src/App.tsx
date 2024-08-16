@@ -5,6 +5,7 @@ import Profile from './pages/Profile'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import Header from './components/Header'
+import 'react-simple-toasts/dist/theme/dark.css'; // import the desired theme
 
 const App = () => {
   return (
