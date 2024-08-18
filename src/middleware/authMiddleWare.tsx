@@ -1,12 +1,19 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { Navigate } from "react-router-dom";
 
-const authMiddleWare = ({ children }: React.ReactNode) => {
-  const { getData } = useLocalStorage();
-  const token = getData("toekn");
-
-  return <>{token ? children : <Navigate to={'/'}/>} </>;
+type AuthMiddleWareProp = {
+  children: ReactNode;
 };
 
-export default authMiddleWare;
+const AuthMiddleWare = ({ children }: AuthMiddleWareProp) => {
+  const { getData } = useLocalStorage();
+  const token = getData("token") as string | null; // Explicitly type token
+
+  // Consider checking the token's validity if it's more than just existence
+  const isAuthenticated = token !== null && token !== undefined;
+
+  return <>{isAuthenticated ? children : <Navigate to="/signup" />}</>;
+};
+
+export default AuthMiddleWare;

@@ -19,7 +19,7 @@ import { FcCancel } from "react-icons/fc";
 
 type PropertyCardPro = {
   title: string;
-  image: string;
+  image: string[];
   location: string;
   price: number;
   sold?: boolean;
@@ -41,14 +41,14 @@ const PropertyCard = ({
     >
       <CardBody>
         <Image
-          src={image}
-          className={` h-52 rounded-lg  ${
+          src={image[0]}
+          className={` h-52 rounded-lg w-80 ${
             hover ? "  opacity-70" : ""
           } cursor-pointer w-full  bg-cover bg-center bg-no-repeat`}
           alt="Green double couch with wooden legs"
           borderRadius="lg"
         />
-        <div className="flex mt-3 gap-5 items-center justify-between">
+        <div className="flex mt-3 gap-5  overflow-hidden items-center justify-between w-80 flex-wrap ">
           <Heading className="font-semibold text-nowrap">{title}</Heading>
           <div className=" flex  justify-center items-center gap-1">
             <FaLocationDot />

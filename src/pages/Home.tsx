@@ -66,7 +66,7 @@ const Home = () => {
               <PropertyCard
                 key={i}
                 title={propertie.title}
-                image={propertie.images[0]}
+                image={propertie.images}
                 location={propertie.location}
                 price={propertie.price}
               />
@@ -101,12 +101,12 @@ const Home = () => {
             Active Listings!
           </p>
 
-          <section className=" grid place-items-center  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 h-auto  gap-5 h-96 w-full p-10 ">
+          <section className=" grid place-items-center  grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-10  w-auto p-10 ">
             {property?.map((propertie: IProperty, i: number) => (
               <PropertyCard
                 key={i}
                 title={propertie.title}
-                image={propertie.images[0]}
+                image={propertie.images}
                 location={propertie.location}
                 price={propertie.price}
               />
@@ -117,12 +117,12 @@ const Home = () => {
             Solded Listings!
           </p>
 
-          <section className=" grid place-items-center  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 h-auto  gap-5 h-96 w-full p-10 ">
+          <section className=" grid place-items-center  grid-cols-1 md:grid-cols-2 lg:grid-cols-4   gap-5  w-full p-10 ">
             {property?.map((propertie: IProperty, i: number) => (
               <PropertyCard
                 key={i}
                 title={propertie.title}
-                image={propertie.images[0]}
+                image={propertie.images}
                 location={propertie.location}
                 price={propertie.price}
                 sold

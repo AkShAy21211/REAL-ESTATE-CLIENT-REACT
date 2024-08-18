@@ -5,7 +5,6 @@ import { COMMON_ENDPOINT } from "../endpoints/common";
 const token = localStorage.getItem("token");
 const axiosInstance = createAxiosInstance(
   "http://localhost:5000/api",
-  token as string
 );
 
 export const signUp = async (

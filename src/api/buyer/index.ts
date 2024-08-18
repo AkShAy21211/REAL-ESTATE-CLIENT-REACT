@@ -1,8 +1,6 @@
 import { createAxiosInstance } from "../axios";
 
 const token = localStorage.getItem("token");
-const userAxios = createAxiosInstance(
+const buyer = createAxiosInstance(
   "http://localhost:5000/api",
-  token as string
 );
-

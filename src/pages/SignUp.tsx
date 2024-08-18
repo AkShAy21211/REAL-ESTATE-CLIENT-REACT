@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
-import toast, { toastConfig } from "react-simple-toasts";
 import "react-simple-toasts/dist/theme/dark.css"; // import the desired theme
 import { signUp } from "../api/common";
 
@@ -31,9 +30,6 @@ const SignUp = () => {
         data.email,
         data.password
       );
-
- 
-
     } catch (error) {
       console.log(error);
     }
@@ -116,6 +112,7 @@ const SignUp = () => {
                   },
                 })}
                 type="password"
+                autoComplete="true"
                 placeholder="Enter password"
                 className="w-full p-3 placeholder:text-gray-700 rounded-lg bg-transparent border border-black"
               />
@@ -132,6 +129,7 @@ const SignUp = () => {
                     value === watch("password") || "Passwords do not match",
                 })}
                 type="password"
+                autoComplete="true"
                 placeholder="Confirm password"
                 className="w-full p-3 placeholder:text-gray-700 rounded-lg bg-transparent border border-black"
               />

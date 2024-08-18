@@ -1,25 +1,17 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-import About from './pages/About'
-import Home from './pages/Home'
-import Profile from './pages/Profile'
-import SignIn from './pages/SignIn'
-import SignUp from './pages/SignUp'
-import Header from './components/Header'
-import 'react-simple-toasts/dist/theme/dark.css'; // import the desired theme
-
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import RealtorRoute from "./routes/RealtorRoute";
+import BuyerRoute from "./routes/BuyerRoute";
+import Header from "./components/Header";
 const App = () => {
   return (
     <Router>
-      <Header/>
+      <Header />
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/about' element={<About/>}/>
-        <Route path='/signin' element={<SignIn/>}/>
-        <Route path='/signup' element={<SignUp/>}/>
-        <Route path='/profile' element={<Profile/>}/>
+        <Route path="/*" element={<BuyerRoute />} />
+        <Route path="/realtor/*" element={<RealtorRoute />} />
       </Routes>
-    </Router> 
-  )
-}
+    </Router>
+  );
+};
 
-export default App
+export default App;
